@@ -1,0 +1,31 @@
+name: 'Update Homebrew Tap'
+description: 'Update Homebrew formula for macOS and Linux platforms'
+branding:
+  icon: 'package'
+  color: 'orange'
+
+inputs:
+  tap-repository:
+    description: 'The homebrew tap repository (e.g., vrischmann/homebrew-tap)'
+    required: true
+  formula-file:
+    description: 'Path to the Homebrew formula file (e.g., Formula/tasks.rb)'
+    required: true
+  release-tag:
+    description: 'The release tag (e.g., v1.0.0)'
+    required: true
+  github-repository:
+    description: 'The GitHub repository containing the release (e.g., vrischmann/tasks)'
+    required: true
+  tap-token:
+    description: 'GitHub token with write access to the tap repository'
+    required: true
+
+runs:
+  using: 'node20'
+  main: 'dist/index.js'
+
+outputs:
+  updated:
+    description: 'Whether the formula was successfully updated'
+    value: ${{ steps.update.outputs.updated }}
